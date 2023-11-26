@@ -11,6 +11,11 @@ var svg = d3.select("#my_dataviz")
   .attr("transform",
         "translate(" + margin.left + "," + margin.top + ")");
 
+d3.selectAll("rect").on("click", function(){
+          var title = this;
+          console.log(title);
+        });
+
 // Read data
 d3.csv("data/autoscout24-germany-dataset.csv", function(data) {
 
@@ -55,6 +60,14 @@ d3.csv("data/autoscout24-germany-dataset.csv", function(data) {
   treemap(root);
   console.log("Root after treemap", root);
 
+
+  //Farben Range definieren
+  const Farbverlauf = d3.scaleLinear()
+  .domain([0, d3.max(function(d) {
+    return d.value;
+  })])
+  .range(["#91bbff", "#d6baff"]);
+
   // use this information to add rectangles:
   // Erstelle Rechtecke für die Treemap-Darstellung
   svg.selectAll('rect')
@@ -65,7 +78,7 @@ d3.csv("data/autoscout24-germany-dataset.csv", function(data) {
     .attr('y', function(d) { return d.y0; })
     .attr('width', function(d) { return d.x1 - d.x0; })
     .attr('height', function(d) { return d.y1 - d.y0; })
-    .attr('fill', 'steelblue')
+    .attr('fill', '#91bbff')
     .attr('stroke', 'white');
   
   // Füge Text für jede Kategorie hinzu
@@ -73,8 +86,44 @@ d3.csv("data/autoscout24-germany-dataset.csv", function(data) {
     .data(root.leaves())
     .enter()
     .append('text')
+    .attr("letter-spacing",0.5)
+    .attr("font-weight",700)
     .attr('x', function(d) { return d.x0 + 5 })
     .attr('y', function(d) { return d.y0 + 20 })
-    .text(function(d) { return [d.data.key, `Count: ${d.value}`]; })
+    .attr("dy", "1.2em")
+    .text(function(d) { return  d.data.key})
     .attr('fill', 'white');
 })
+
+
+
+
+
+//Tooltip für 
+d3.selectAll("svg")
+.on("mousemove touchmove", createtooltip);
+
+function createtooltip() {
+  var tooltip = d3.select(".tooltip");
+  var tgt = d3.select(d3.event.target);
+
+  var data = tgt.data()[0];
+
+  if (typeof data === 'undefined') {
+    
+    tooltip
+      .style("opacity", 0);
+  } else {
+    tooltip
+      .style("opacity", 0.78)
+      .style("left", (d3.event.pageX - tooltip.node().offsetWidth / 4) + "px")
+      .style("top", (d3.event.pageY - tooltip.node().offsetHeight - 5) + "px");
+
+    tooltip 
+        .html(`
+          <p><b>${data.data.key}</b></p>
+          <p>Anzahl Listungen: ${data.value}</p>
+        `);
+  }
+}
+
