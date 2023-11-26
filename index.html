@@ -71,11 +71,15 @@
 
         <div class="w3-content w3-container w3-padding-64" id="viz">
             <h3 class="w3-center">Visualization</h3>
-            <p><br/>
-                &DAVI& Hierhin kommt der komplette D3 Code (kann natürlich auch mit externen script gemacht werden, aber hier hat er auch Platz)
-                Beispiel: <br/>
+            <p>
+                
                 <div class="tooltip"></div>
-                <svg id="my_dataviz" width="1024" height="900"></svg>
+                <div class="slidecontainer w3-margin-64">
+                                       
+                    <h5 class="w3-center" id="OutputSlider">Jahr der Listung auf Autoscout24:</h5>
+                    <input type="range" min="2011" max="2021" value="2011" class="slider" id="SliderRegistrationYear">
+                </div>
+                <svg id="treeMapMake" width="1024" height="900"></svg>
                            
             </p>
         </div>
