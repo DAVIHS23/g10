@@ -1,8 +1,11 @@
+//Margin und Grössen des Visuals
 var margin = {top: 10, right: 10, bottom: 10, left: 10},
   width = 1024 - margin.left - margin.right,
   height = 900 - margin.top - margin.bottom;
 
-// append the svg object to the body of the page
+
+
+// Append SVG
 var svg = d3.select("#treeMapMake")
 .append("svg")
   .attr("width", width + margin.left + margin.right)
@@ -11,18 +14,20 @@ var svg = d3.select("#treeMapMake")
   .attr("transform",
         "translate(" + margin.left + "," + margin.top + ")");
 
+
+//Slider mit Standart Wert
 var slider = document.getElementById("SliderRegistrationYear");
 var output = document.getElementById("OutputSlider");
-output.innerHTML = "Jahr der Listung auf Autoscout24: "+slider.value; // Display the default slider value
+output.innerHTML = "Jahr der Listung auf Autoscout24: "+slider.value;
         
 
-
+//Get Data / Transform Data in JS Objects und aufruf der Draw Visuals Funktionen
 d3.csv("data/autoscout24-germany-dataset.csv", function(data) {
 
     drawTreeMap(data);
 });
 
-
+//TReemap  mit Marken pro Listen Jahr 
 function drawTreeMap(data){
 
   select = d3.select("#SliderRegistrationYear");
@@ -37,12 +42,13 @@ function drawTreeMap(data){
   renderTreeMapMake(groupedData);
   }
 
+//Filterdata for Listenjahr, returns filterd and GroupedData (nach Marke gruppiert)
 function TreeMapFilter(data, year){
   
   console.log("Original Objects", data);
 
   data = data.filter(function(d){ return d.year == year});
-  // Gruppiere die Daten nach der Kategorie-Spalte
+  // Gruppiere die Daten nach der Marken-Spalte
   var groupedData = d3.nest()
   .key(function(d) { return d.make; })
   .rollup(function(leaves) {
@@ -57,11 +63,12 @@ function TreeMapFilter(data, year){
   groupedData = groupedData.slice(0,20);
 
         console.log("GroupedData Filtered:", groupedData); 
-        //console.log("ArrayData[0] :", groupedData[0]); 
-        //console.log("ArrayData[1] :", groupedData[1]); 
+        
   return groupedData;
 }
 
+
+//Darstellung des SVG TreeMap für Marke pro Listenjahr
 function renderTreeMapMake(groupedData){
   
 
@@ -115,46 +122,12 @@ function renderTreeMapMake(groupedData){
       .attr('x', function(d) { return d.x0 + 5 })
       .attr('y', function(d) { return d.y0 + 20 })
       .attr("dy", "1.2em")
-      .text(function(d) { return  d.data.key+" "+d.value})
+      .text(function(d) { return  d.data.key})
       .attr('fill', 'white');
 
+    //Löscht allte Cells
     cell.exit().remove();
-
-
-   /* svg.selectAll('rect')
-      .data(root.leaves())
-      .enter()
-      .append('rect')
-      .attr('x', function(d) { return d.x0; })
-      .attr('y', function(d) { return d.y0; })
-      .attr('width', function(d) { return d.x1 - d.x0; })
-      .attr('height', function(d) { return d.y1 - d.y0; })
-      .attr('fill', '#91bbff')
-      .attr('stroke', 'white');
-    
-   
-
-
-    svg.selectAll('text')
-      .data(root.leaves())
-      .enter()
-      .append('text')
-      .attr("letter-spacing",0.5)
-      .attr("font-weight",700)
-      .attr('x', function(d) { return d.x0 + 5 })
-      .attr('y', function(d) { return d.y0 + 20 })
-      .attr("dy", "1.2em")
-      .text(function(d) { return  d.data.key+" "+d.value})
-      .attr('fill', 'white');
-
-      */
 }       
-
-
-
-
-
-
 
 //Tooltip für 
 d3.selectAll("svg")
