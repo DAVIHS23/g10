@@ -18,13 +18,14 @@ var svg = d3.select("#treeMapMake")
 //Slider mit Standart Wert
 var slider = document.getElementById("SliderRegistrationYear");
 var output = document.getElementById("OutputSlider");
-output.innerHTML = "Jahr der Listung auf Autoscout24: "+slider.value;
+output.innerHTML = "Verkausjahr auf Autoscout24: "+slider.value;
         
 
 //Get Data / Transform Data in JS Objects und aufruf der Draw Visuals Funktionen
 d3.csv("data/autoscout24-germany-dataset.csv", function(data) {
 
     drawTreeMap(data);
+    renderScatterplot(data);
 });
 
 //TReemap  mit Marken pro Listen Jahr 
@@ -68,7 +69,7 @@ function TreeMapFilter(data, year){
 }
 
 
-//Darstellung des SVG TreeMap für Marke pro Listenjahr
+//Darstellung des SVG TreeMap für Marke pro Verkauf
 function renderTreeMapMake(groupedData){
   
 
@@ -129,11 +130,12 @@ function renderTreeMapMake(groupedData){
     cell.exit().remove();
 }       
 
-//Tooltip für 
+//Event für Mousover Tooltip Tree Map
 d3.selectAll("svg")
-.on("mousemove touchmove", createtooltip);
+.on("mousemove touchmove", createtooltipTreeMap);
 
-function createtooltip() {
+//Display Tooltip Treemap
+function createtooltipTreeMap() {
   var tooltip = d3.select(".tooltip");
   var tgt = d3.select(d3.event.target);
 
@@ -152,8 +154,59 @@ function createtooltip() {
     tooltip 
         .html(`
           <p><b>${data.data.key}</b></p>
-          <p>Anzahl Listungen: ${data.value}</p>
+          <p>Anzahl Verkäufe: ${data.value}</p>
         `);
   }
+}
+
+function renderScatterplot(data){
+
+  var xScale = d3.scaleLinear()
+  .domain([0, d3.max(data, function(d) { return d.price; })])
+  .range([0, 1000]);
+
+var yScale = d3.scaleLinear()
+  .domain([0, d3.max(data, function(d) { return d.mileage; })])
+  .range([500, 0]);
+
+  var svgScatterPlot = d3.select("#ScaterplotKmPrice");
+  
+  
+  svgScatterPlot.append("svg")
+  .attr("width", width + margin.left + margin.right )
+  .attr("height", height + margin.top + margin.bottom)
+.append("g")
+  .attr("transform",
+        "translate(" + margin.left + "," + margin.top + ")");
+
+  //Add Points to SVG ScatterPlot
+  svgScatterPlot.selectAll("circle")
+  .data(data)
+  .enter()
+  .append("circle")
+  .attr("cx", function(d) { return xScale(d.price); })
+  .attr("cy", function(d) { return yScale(d.mileage); })
+  .attr("r", 2); // radius of circles
+  
+// Add x-axis
+svgScatterPlot.append("g")
+  .attr("transform", "translate(0, 1000)")
+  .call(d3.axisBottom(xScale));
+
+// Add y-axis
+svgScatterPlot.append("g")
+  .call(d3.axisLeft(yScale));
+
+// Add labels
+svgScatterPlot.append("text")
+  .attr("transform", "translate(250, 480)")
+  .text("Preis");
+
+  svgScatterPlot.append("text")
+  .attr("transform", "rotate(-90)")
+  .attr("y", -10)
+  .attr("x", -250)
+  .text("Kilometerstand");
+
 }
 

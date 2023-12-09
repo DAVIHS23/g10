@@ -59,11 +59,6 @@ body, html {
   margin: 3px;
 }
 
-
-
-
-
-
 .slidecontainer {
   width: 100%;
 }
@@ -97,4 +92,11 @@ body, html {
   height: 25px;
   background: #d6baff;
   cursor: pointer;
+}
+
+svg{
+  max-width: 100%;
+  width:100% ;
+  display: block!important;
+
 }

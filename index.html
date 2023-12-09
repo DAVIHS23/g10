@@ -76,15 +76,28 @@
                 <div class="tooltip"></div>
                 <div class="slidecontainer w3-margin-64">
                                        
-                    <h5 class="w3-center" id="OutputSlider">Jahr der Listung auf Autoscout24:</h5>
+                    <h5 class="w3-center" id="OutputSlider">Verkaufsjahr auf Autoscout24:</h5>
                     <input type="range" min="2011" max="2021" value="2011" class="slider" id="SliderRegistrationYear">
                 </div>
                 <svg id="treeMapMake" width="1024" height="900"></svg>
                            
             </p>
+           
         </div>
         
- <!-- Load Visualisation Scripts-->
+
+        <div class="w3-content w3-container w3-padding-64" id="vizScatterplot">
+            <p>
+                <div class="w3-margin-64 w3-container">
+                    <h5 class="w3-center">Preis - Kilometerstand</h5>
+                    <svg id="ScaterplotKmPrice" width="1024" height="900"></svg>
+
+                </div>
+
+            </p>
+        </div>
+
+         <!-- Load Visualisation Scripts-->
     <script src="./js/Visualisation.js"></script>
 
 <!-- SECTION DESIGN -->
@@ -95,6 +108,8 @@
                 &DAVI& Hier die Info wieso weshalb warum man was hingebogen hat im D3
             </p>
         </div>  
+
+
 <!-- SECTION DESIGN -->
 
         <div class="w3-content w3-container w3-padding-64" id="ref">
