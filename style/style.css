@@ -3,6 +3,7 @@ body, html {
   height: 100%;
   color: #777;
   line-height: 1.8;
+  align-content: center;
 }
 
 /* Create a Parallax Effect */
@@ -13,23 +14,9 @@ body, html {
   background-size: cover;
 }
 
-/* First image (Logo. Full height) */
-.bgimg-1 {
-  background-image: url('https://cdn.pixabay.com/photo/2018/01/29/13/03/internet-3116062_1280.jpg');
-  min-height: 100%;
-}
-
-/* Second image (Portfolio) */
-.bgimg-2 {
-  background-image: url("https://cdn.pixabay.com/photo/2018/08/18/13/26/interface-3614766_1280.png");
-  min-height: 400px;
-}
-
 .navbarbg{
     background-color: white;
 }
-
-
 
 .w3-wide {letter-spacing: 10px;}
 .w3-hover-opacity {cursor: pointer;}
@@ -41,6 +28,122 @@ body, html {
     min-height: 400px;
   }
 }
+
+
+
+
+
+
+
+/*Carslideshow Bounds*/
+#home-track {
+  display: flex;
+  gap: 1vmin;
+  transform: translate(0%, 0%); 
+  user-select: none; /* -- Prevent image highlighting -- */
+  object-position: 100% center;
+}
+
+
+#home-track > .carimage {
+  width: 40vmin;
+  height: 56vmin;
+  object-position: 100% center;
+  object-fit: cover;
+}
+
+body.menu-toggled > .meta-link > span {
+  color: rgb(30, 30, 30);
+}
+
+#source-link {
+  bottom: 60px;
+}
+
+#source-link > i {
+  color: rgb(94, 106, 210);
+}
+
+#yt-link > i {
+  color: rgb(239, 83, 80);
+}
+
+.meta-link {
+  align-items: center;
+  backdrop-filter: blur(3px);
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  bottom: 10px;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1);
+  cursor: pointer;  
+  display: inline-flex;
+  gap: 5px;
+  left: 10px;
+  padding: 10px 20px;
+  position: fixed;
+  text-decoration: none;
+  transition: background-color 400ms, border-color 400ms;
+}
+
+.meta-link:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.meta-link > i, .meta-link > span {
+  height: 20px;
+  line-height: 20px;
+}
+
+.meta-link > span {
+  color: white;
+  font-family: "Rubik", sans-serif;
+  font-weight: 500;
+}
+
+
+/*Trenner SVG*/ 
+.trenner{
+  background-color: rgb(184, 142, 142);
+  width: 100%;
+  height: 20px;
+  padding-bottom: 50px;
+}
+
+/*Titel Effekt*/
+.title_auto{
+  font-size: 40px;
+  font-weight: 900;
+  color: rgb(113, 81, 81);
+  text-align: center;
+  text-transform: uppercase;
+  font-family: "Lato", sans-serif;
+  
+  --x-offset: -0.0625em;
+  --y-offset: 0.0625em;
+  --stroke: 0.025em;
+  --background-color: white;
+  --stroke-color: lightblue;
+  
+  text-shadow: 
+    
+    var(--x-offset)
+    var(--y-offset)
+    0px
+    var(--background-color), 
+    
+    calc( var(--x-offset) - var(--stroke) )
+    calc( var(--y-offset) + var(--stroke) )
+    0px
+    var(--stroke-color);
+  
+}
+
+
+
+
+
 
 
 
