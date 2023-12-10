@@ -63,76 +63,106 @@
     </p>
 </div>
 
-
+<!-- TRENNER -->
+<div class="trenner">
+    <svg id = "svg2"></svg>
+</div>
 
 <!-- SECTION DATA   -->
-        <div class="w3-content w3-container w3-padding-64" id="data">
-            <h3 class="w3-center">Data</h3>
-            <p>&DAVI& Untertitel<br/>
-                &DAVI& Text woher die Daten kommen nach Aufgabenstellung
-            </p>
-        </div>
+<div class="w3-content w3-container w3-padding-64" id="data">
+    <h3 class="w3-center" style="font-weight: bold;">Datenset</h3>
+    <p>
+        Das Datenset, verfügbar auf Kaggle, umfasst Fahrzeugdaten von der Autoscout24-Plattform,
+        die zwischen 2011 und 2021 gesammelt wurden. Es enthält spezifische Informationen zu 46’405 dokumentierten
+        Fahrzeugverkäufen,
+        einschliesslich Hersteller, Modell, Kilometerstand, Verkaufspreis und Datum der ersten Inverkehrsetzung der
+        Fahrzeuge.
+        Diese Daten bieten eine wertvolle Ressource für die Analyse von Automobilmarkt-Trends in diesem Zeitraum.
+
+    </p>
+</div>
+
+<div class="piccontainer">
+    <div><img class="datasetimage" src="images/dataset.png" /></div>
+</div>
 
 <!-- SECTION VISUALIZATION -->
 
-        <div class="w3-content w3-container w3-padding-64" id="viz">
-            <h3 class="w3-center">Visualization</h3>
-            <p>
-                
-                <div class="tooltip"></div>
-                <div class="slidecontainer w3-margin-64">
-                                       
-                    <h5 class="w3-center" id="OutputSlider">Verkaufsjahr auf Autoscout24:</h5>
-                    <input type="range" min="2011" max="2021" value="2011" class="slider" id="SliderRegistrationYear">
-                </div>
-                <svg id="treeMapMake" width="1024" height="900"></svg>
-                           
-            </p>
-           
-        </div>
-        
+<div class="w3-content w3-container w3-padding-64" id="viz">
+    <h3 class="w3-center">Visualization</h3>
+    <p>
 
-        <div class="w3-content w3-container w3-padding-64" id="vizScatterplot">
-            <p>
-                <div class="w3-margin-64 w3-container">
-                    <h5 class="w3-center">Preis - Kilometerstand</h5>
-                    <svg id="ScaterplotKmPrice" width="1024" height="900"></svg>
+    <div class="tooltip"></div>
+    <div class="slidecontainer w3-margin-64">
 
-                </div>
+        <h5 class="w3-center" id="OutputSlider">Verkaufsjahr auf Autoscout24:</h5>
+        <input type="range" min="2011" max="2021" value="2011" class="slider" id="SliderRegistrationYear">
+    </div>
+    <svg id="treeMapMake" width="1024" height="900"></svg>
 
-            </p>
-        </div>
+    </p>
 
-         <!-- Load Visualisation Scripts-->
-    <script src="./js/Visualisation.js"></script>
+</div>
 
-<!-- SECTION DESIGN -->
 
-        <div class="w3-content w3-container w3-padding-64" id="design">
-            <h3 class="w3-center">Desing</h3>
-            <p>&DAVI& Untertitel<br/>
-                &DAVI& Hier die Info wieso weshalb warum man was hingebogen hat im D3
-            </p>
-        </div>  
+<div class="w3-content w3-container w3-padding-64" id="vizScatterplot">
+    <p>
+    <div class="w3-margin-64 w3-container">
+        <h5 class="w3-center">Preis - Kilometerstand</h5>
+        <svg id="ScaterplotKmPrice" width="1024" height="900"></svg>
 
+    </div>
+
+    </p>
+</div>
+
+<!-- Load Visualisation Scripts-->
+<script src="./js/Visualisation.js"></script>
 
 <!-- SECTION DESIGN -->
+<div class="w3-content w3-container w3-padding-64" id="design">
+    <h3 class="w3-center" style="font-weight: bold;">Design</h3>
+    <p>Treemap</br>
+        Bei der Betrachtung der Entwicklungen im Automobilmarkt von 2011 bis 2021 bietet ein Treemap eine optimale
+        Lösung, um die Schwankungen in den Marktanteilen der verschiedenen Automarken zu veranschaulichen. Durch
+        effiziente Raumausnutzung erlaubt der Treemap die Darstellung der Marktanteile einer grossen Anzahl an
+        Automarken, ohne die Übersicht zu verlieren. In einem Treemap verdeutlicht die Grösse jedes einzelnen Rechtecks
+        den Marktanteil einer Marke und ermöglicht so einen direkten Einblick in die Marktpräsenz sowohl von führenden
+        als auch von kleineren Marken.
+    </p>
+    <br>
+    <p>Donut<br />
+        Um die Veränderungen im Anteil von Diesel-, Benzin- und Elektromotoren im Automobilmarkt über die Jahre hinweg
+        darzustellen, bietet ein Donut-Diagramm mit einem integrierten Slider für die Jahresauswahl eine anschauliche
+        Abbildung der Daten. Diese Art der Visualisierung macht es möglich, die Verteilung der Antriebsarten über einen
+        bestimmten Zeitraum effektiv zu kommunizieren.
+    </p>
+    <br>
+    <p>Scatterplot<br />
+        Um die Preisentwicklung der Fahrzeuge mit verschiedenen Motortypen bei steigender Kilometeranzahl zu betrachten,
+        wird ein Scatterplot verwendet.
+    </p>
+</div>
 
-        <div class="w3-content w3-container w3-padding-64" id="ref">
-            <h3 class="w3-center">References</h3>
-            <p>&DAVI& Untertitel<br/>
-                &DAVI& Wo hast du was geklaut?, die Website hier ist von W3.org, einfach in einer viel weniger fancy-version
-            </p>
-        </div>  
-<!-- SECTION DESIGN -->
+<!-- SECTION REFERENZEN -->
+<div class="w3-content w3-container w3-padding-64" id="ref">
+    <h3 class="w3-center">Referenzen</h3>
+    <p>Quellen<br />
+        Slideshow der Autos: https://codepen.io/Hyperplexed/full/MWXBRBp <br />
+        Datenset: https://www.kaggle.com/datasets/ander289386/cars-germany <br />
+        Visualisierungen: https://d3-graph-gallery.com/
 
-        <div class="w3-content w3-container w3-padding-64" id="Team">
-            <h3 class="w3-center">Team</h3>
-            <p>&DAVI& Untertitel<br/>
-                &DAVI& Kontaktdaten des Teams
-            </p>
-        </div>  
 
-    </body>
+    </p>
+
+</div>
+
+<!-- SECTION Team -->
+
+<div class="w3-content w3-container w3-padding-64" id="Team">
+    <h3 class="w3-center">Team</h3>
+    <p> Leander Duft <br> Sarah Kovacs
+    </p>
+</div>
 
 </html>

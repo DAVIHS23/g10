@@ -3,7 +3,6 @@ body, html {
   height: 100%;
   color: #777;
   line-height: 1.8;
-  align-content: center;
 }
 
 /* Create a Parallax Effect */
@@ -28,11 +27,6 @@ body, html {
     min-height: 400px;
   }
 }
-
-
-
-
-
 
 
 /*Carslideshow Bounds*/
@@ -140,7 +134,16 @@ body.menu-toggled > .meta-link > span {
   
 }
 
+.datasetimage{
+  height: 200px;
+  display: block;
+  margin: auto;
+}
 
+.piccontainer{
+  align-items: center;
+  justify-content: center;
+}
 
 
 
@@ -201,5 +204,4 @@ svg{
   max-width: 100%;
   width:100% ;
   display: block!important;
-
 }
