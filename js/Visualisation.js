@@ -244,7 +244,7 @@ svg.append("g")
 
 // Bars
 svg.selectAll("mybar")
-  .data(data)
+  .data(daten)
   .enter()
   .append("rect")
     .attr("x", function(d) { return x(d.Country); })
