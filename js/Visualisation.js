@@ -210,10 +210,11 @@ svgScatterPlot.append("text")
 
 }
 
+
 //Balkendiagramm 
 // append the svg object to the body of the page
-var svg = d3.select("Barplot")
-  .append("svg")
+var svg_bp = d3.select("Barplot")
+  .append("svg_bp")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
   .append("g")
@@ -228,7 +229,7 @@ var x = d3.scaleBand()
   .range([ 0, width ])
   .domain(daten.map(function(d) { return d.Country; }))
   .padding(0.2);
-svg.append("g")
+svg_bp.append("g")
   .attr("transform", "translate(0," + height + ")")
   .call(d3.axisBottom(x))
   .selectAll("text")
@@ -239,11 +240,11 @@ svg.append("g")
 var y = d3.scaleLinear()
   .domain([0, 13000])
   .range([ height, 0]);
-svg.append("g")
+svg_bp.append("g")
   .call(d3.axisLeft(y));
 
 // Bars
-svg.selectAll("mybar")
+svg_bp.selectAll("mybar")
   .data(daten)
   .enter()
   .append("rect")
