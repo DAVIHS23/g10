@@ -117,6 +117,19 @@
     </p>
 </div>
 
+<div class="w3-content w3-container w3-padding-64" id="vizScatterplot">
+    <p>
+    <div class="w3-margin-64 w3-container">
+        <h5 class="w3-center">Balkendiagramm Visualisation der Motortypen</h5>
+        <h5 class="w3-center" id="OutputSlider">Verkaufsjahr auf Autoscout24:</h5>
+        <input type="range" min="2011" max="2021" value="2011" class="slider" id="SliderRegistrationYear">
+        <svg id="balkenmotors" width="1024" height="900"></svg>
+
+    </div>
+
+    </p>
+</div>
+
 <!-- Load Visualisation Scripts-->
 <script src="./js/Visualisation.js"></script>
 
@@ -125,29 +138,32 @@
     <h3 class="w3-center" style="font-weight: bold;">Design</h3>
     <p>Designentscheidungen</br>
         Um den Untersuchungsgegenstand in Form der Frage: «Wie haben sich die Verkäufe von Autos über Autoscout24 zwischen 2011-2021, 
-        insbesondere in Bezug auf die Motorart verändert? » zu untersuchen, habe wir uns folgende Überlegungen gemacht. <br>
-
-        Bei der Konzeption einer Visualisierung der Marktentwicklung im Gebrauchtwagenmarkt 
-        von 2011 bis 2021 stützen wir uns auf mehrere Schlüsselprinzipien des Designs und der Datenvisualisierung. <br>
+        insbesondere in Bezug auf die Motorart verändert? » zu untersuchen, habe wir uns folgende Überlegungen gemacht. 
+        <br>
         
         Die Grundlagen des visuellen Designs leiten unsere Wahl von Farben und Anordnung, um die Daten nicht 
         nur visuell ansprechend, sondern auch verständlich zu machen. Zum Beispiel repräsentieren unterschiedliche 
-        Farben die verschiedenen Aspekte und tragen somit zur schnellen Erkennbarkeit bei. <br>
+        Farben die verschiedenen Aspekte und tragen somit zur schnellen Erkennbarkeit bei. 
+        <br>
 
         Edward Tufte's fundamentale Prinzipien des analytischen Designs beeinflussen massgeblich 
         unsere Entscheidung für die Treemap, den Scatterplot und das Balkendiagramm. Tufte betont die Wichtigkeit, Daten mit Genauigkeit und Effizienz 
         darzustellen, was uns dazu veranlasst, die Grösse der einzelnen Bereiche genau proportional zum Marktanteil 
         jeder Marke zu gestalten. So wird eine hohe Informationsdichte erreicht, die es den Betrachtenden erlaubt, 
-        Markttrends, trotzt vieler Marken, auf einen Blick zu erfassen. <br>
+        Markttrends, trotzt vieler Marken, auf einen Blick zu erfassen. Die drei Gewählten Visualisierungen sind allgemein bekannt und 
+        für Nutzende einfach zu verstehen und interpretieren. 
+        <br>
 
         Das Konzept der Data-Ink Ratio, unterstützt unser Bestreben, unnötige grafische 
         Elemente zu vermeiden. Aus diesem Grund ist das Design der Visualisationen simpel und ohne unnötige 
-        Dekoration gestaltet. <br>
+        Dekoration gestaltet. 
+        <br>
 
         Die menschliche Wahrnehmung spielt eine entscheidende Rolle in unserem Designprozess. 
         Die Visualisationen sind so gestaltet, dass sie den natürlichen Sehgewohnheiten entsprechen, 
         mit grosszügigen, gut lesbaren Beschriftungen und einer intuitiven Anordnung, die es den 
-        Nutzenden ermöglicht, Muster und Veränderungen zu erkennen. <br>
+        Nutzenden ermöglicht, Muster und Veränderungen zu erkennen. 
+        <br>
 
         Schliesslich integrieren wir ein Interaktionskonzept, das es ermöglicht, 
         durch Berührung oder Mauszeiger zusätzliche Daten einzusehen. Dies bietet einen Mehrwert für 
@@ -155,17 +171,6 @@
 
     </p>
     <br>
-    <p>Donut<br />
-        Um die Veränderungen im Anteil von Diesel-, Benzin- und Elektromotoren im Automobilmarkt über die Jahre hinweg
-        darzustellen, bietet ein Donut-Diagramm mit einem integrierten Slider für die Jahresauswahl eine anschauliche
-        Abbildung der Daten. Diese Art der Visualisierung macht es möglich, die Verteilung der Antriebsarten über einen
-        bestimmten Zeitraum effektiv zu kommunizieren.
-    </p>
-    <br>
-    <p>Scatterplot<br />
-        Um die Preisentwicklung der Fahrzeuge mit verschiedenen Motortypen bei steigender Kilometeranzahl zu betrachten,
-        wird ein Scatterplot verwendet.
-    </p>
 </div>
 
 <!-- SECTION REFERENZEN -->
