@@ -26,7 +26,6 @@ d3.csv("data/autoscout24-germany-dataset.csv", function(data) {
 
     drawTreeMap(data);
     renderScatterplot(data);
-    drawBarChart(data);
 });
 
 //TReemap  mit Marken pro Listen Jahr 
