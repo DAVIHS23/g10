@@ -26,6 +26,7 @@ d3.csv("data/autoscout24-germany-dataset.csv", function(data) {
 
     drawTreeMap(data);
     renderScatterplot(data);
+    drawBarChart(data);
 });
 
 //TReemap  mit Marken pro Listen Jahr 
@@ -220,17 +221,22 @@ var svg = d3.select("#balkenmotors")
   .attr("transform",
         "translate(" + margin.left + "," + margin.top + ")");
 
+//Slider mit Standart Wert 2
+var slider2 = document.getElementById("SliderRegistrationYear2");
+var output2 = document.getElementById("OutputSlider2");
+output.innerHTML = "Verkausjahr auf Autoscout24: "+slider.value;
+
 
 //Erstellen des Balendiagramms        
 function drawBarChart(data) {
-  var svgBar = d3.select("#balkenmotors")
+  var svgBar = d3.select("#SliderRegistrationYear2")
       .append("svg")
       .attr("width", width + margin.left + margin.right)
       .attr("height", height + margin.top + margin.bottom)
       .append("g")
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-  updateBarChart(data, slider.value); 
+  updateBarChart(data, slider2.value); 
 
   // Slider Update 
   slider.oninput = function() {
