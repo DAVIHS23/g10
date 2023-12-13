@@ -212,7 +212,7 @@ svgScatterPlot.append("text")
 
 //Balkendiagramm 
 // append the svg object to the body of the page
-var svg = d3.select("#vizBarchart")
+var svg = d3.select("Barplot")
   .append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
