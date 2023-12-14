@@ -8,6 +8,8 @@
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="js/Slideshow.js" defer></script>
+   
     
         <!-- Load d3.js -->
         <script src="https://d3js.org/d3.v4.js"></script>
@@ -18,115 +20,174 @@
     <body>
 
 <!-- NAVIGATION BAR -->
-        <div class="w3-top navbarbg">
-            <div class="w3-bar" id="myNavbar">
-                    <a class="w3-bar-item w3-button w3-hover-black w3-hide-medium w3-hide-large w3-right" href="javascript:void(0);" onclick="toggleFunction()" title="Toggle Navigation Menu">
-                        <i class="fa fa-bars"></i>
-                    </a>
+<div class="w3-top navbarbg">
+    <div class="w3-bar" id="myNavbar">
+            <a class="w3-bar-item w3-button w3-hover-black w3-hide-medium w3-hide-large w3-right" href="javascript:void(0);" onclick="toggleFunction()" title="Toggle Navigation Menu">
+                <i class="fa fa-bars"></i>
+            </a>
+            <a href="#home" class="w3-bar-item w3-button">HOME</a>
+            <a href="#info" class="w3-bar-item w3-button">Projektinfo</a>
+            <a href="#data" class="w3-bar-item w3-button">Datenset</a>
+            <a href="#viz" class="w3-bar-item w3-button">Visualisation</a>
+            <a href="#design" class="w3-bar-item w3-button">Design</a>
+            <a href="#ref" class="w3-bar-item w3-button">Quellen</a>
+            <a href="#Team" class="w3-bar-item w3-button">Team</a>
+    </div>
+</div>
 
-                    <a href="#home" class="w3-bar-item w3-button">HOME</a>
-                    <a href="#info" class="w3-bar-item w3-button">Project Info</a>
-                    <a href="#data" class="w3-bar-item w3-button">Data</a>
-                    <a href="#viz" class="w3-bar-item w3-button">Visualization</a>
-                    <a href="#design" class="w3-bar-item w3-button">Design Choices</a>
-                    <a href="#ref" class="w3-bar-item w3-button">References</a>
-                    <a href="#team" class="w3-bar-item w3-button">Team</a>
+<!-- CAR SLIDESHOW -->
+<div id="carslideshowanimation">
+<div id="home-track" data-mouse-down-at="0" data-prev-percentage="0">
+    <img class="carimage" src="images/cars/porsche.jpeg" draggable="false" />
+    <img class="carimage" src="images/cars/bmw.webp" draggable="false" />
+    <img class="carimage" src="images/cars/bugatti.jpeg" draggable="false" />
+    <img class="carimage" src="images/cars/tesla.jpeg" draggable="false" />
+    <img class="carimage" src="images/cars/toyota.webp" draggable="false" />
+    <img class="carimage" src="images/cars/mercedes.jpeg" draggable="false" />
+    <img class="carimage" src="images/cars/porscheT.jpeg" draggable="false" />
+    <img class="carimage" src="images/cars/volvo.jpeg" draggable="false" />
+    <img class="carimage" src="images/cars/mustang.jpeg" draggable="false" />
+    <img class="carimage" src="images/cars/vw.jpeg" draggable="false" />
+  </div>
+</div>
 
-            </div>
-        </div>
-
-<!-- FIRST BG IMAGE / HOME SCREEN -->
-        <div class="bgimg-1 w3-display-containeer w3-opacity-min" id="home">
-            <div class="w3-display-middle" style="white-space:nowrap;">
-                    <span class="w3-center w3-padding-large w3-black w3-xlarge w3-wide w3-animate-opacity"> Autoscout <span class="w3-hide-small">in </span> Daten </span>
-            </div>
-        </div>
+<!-- TRENNER -->
+<div class="trenner">
+    <svg id = "svg2"></svg>
+</div>
 
 <!-- SECTION PROJECT INFO   -->
-        <div class="w3-content w3-container w3-padding-64" id="info">
-            <h3 class="w4-center">Project Info</h3>
-            <p>&DAVI& Untertitel <br />
-                &DAVI& - Der Rest von Text über das Projekt
-            </p>
-        </div>
+<div class="w3-content w3-container w3-padding-64" id="info2">
+    <h3 contenteditable class="title_auto">Autoscout24 Analyse</h3>
+    <p>
+    In dieser Datenvisualisation werden wir Autoverkäufe in Deutschland auf ihre Marken analysieren und visuell darstellen.<br>
+    <br>
+    Besonderer Fokus im Untersuchungsgegenstand liegt auf der Betrachtung der Motortypen und deren Veränderung auf dem Markt.
+    Grosse Marken wie Volvo und VW rüsten immer mehr auf Elektromotoren um. In dieser Untersuchung möchten wir diese Veränderung auf dem Markt visualisieren. <br> 
+    </p>
+</div>
 
-<!-- SECOND BG IMAGE WITH Data TEXT -->
-
-        <div class="bgimg-2 w3-display-container w3-opacity-min">
-             <div class="w3-display-middle">
-                <span class="w3-xxlarge w3-text-white w3-wide">DATA</span>
-            </div>
-        </div>
-
+<!-- TRENNER -->
+<div class="trenner">
+    <svg id = "svg2"></svg>
+</div>
 
 <!-- SECTION DATA   -->
-        <div class="w3-content w3-container w3-padding-64" id="data">
-            <h3 class="w3-center">Data</h3>
-            <p>&DAVI& Untertitel<br/>
-                &DAVI& Text woher die Daten kommen nach Aufgabenstellung
-            </p>
-        </div>
+<div class="w3-content w3-container w3-padding-64" id="data">
+    <h3 class="w3-center" style="font-weight: bold;">Datenset</h3>
+    <p>
+        Das Datenset, verfügbar auf Kaggle, umfasst Fahrzeugdaten von der Autoscout24-Plattform,
+        die zwischen 2011 und 2021 gesammelt wurden. Es enthält spezifische Informationen zu 46’405 dokumentierten
+        Fahrzeugverkäufen,
+        einschliesslich Hersteller, Modell, Kilometerstand, Verkaufspreis und Datum der ersten Inverkehrsetzung der
+        Fahrzeuge.
+        Diese Daten bieten eine wertvolle Ressource für die Analyse von Automobilmarkt-Trends in diesem Zeitraum.
+
+    </p>
+</div>
+
+<div class="piccontainer">
+    <div><img class="datasetimage" src="images/dataset.png" /></div>
+</div>
 
 <!-- SECTION VISUALIZATION -->
 
-        <div class="w3-content w3-container w3-padding-64" id="viz">
-            <h3 class="w3-center">Visualization</h3>
-            <p>
-                
-                <div class="tooltip"></div>
-                <div class="slidecontainer w3-margin-64">
-                                       
-                    <h5 class="w3-center" id="OutputSlider">Verkaufsjahr auf Autoscout24:</h5>
-                    <input type="range" min="2011" max="2021" value="2011" class="slider" id="SliderRegistrationYear">
-                </div>
-                <svg id="treeMapMake" width="1024" height="900"></svg>
-                           
-            </p>
-           
-        </div>
-        
+<div class="w3-content w3-container w3-padding-64" id="viz">
+    <h3 class="w3-center">Visualization</h3>
+    <p>
 
-        <div class="w3-content w3-container w3-padding-64" id="vizScatterplot">
-            <p>
-                <div class="w3-margin-64 w3-container">
-                    <h5 class="w3-center">Preis - Kilometerstand</h5>
-                    <svg id="ScaterplotKmPrice" width="1024" height="900"></svg>
+    <div class="tooltip"></div>
+    <div class="slidecontainer w3-margin-64">
 
-                </div>
+        <h5 class="w3-center" id="OutputSlider">Verkaufsjahr auf Autoscout24:</h5>
+        <input type="range" min="2011" max="2021" value="2011" class="slider" id="SliderRegistrationYear">
+    </div>
+    <svg id="treeMapMake" width="1024" height="900"></svg>
 
-            </p>
-        </div>
+    </p>
 
-         <!-- Load Visualisation Scripts-->
-    <script src="./js/Visualisation.js"></script>
+</div>
 
-<!-- SECTION DESIGN -->
 
-        <div class="w3-content w3-container w3-padding-64" id="design">
-            <h3 class="w3-center">Desing</h3>
-            <p>&DAVI& Untertitel<br/>
-                &DAVI& Hier die Info wieso weshalb warum man was hingebogen hat im D3
-            </p>
-        </div>  
+<div class="w3-content w3-container w3-padding-64" id="vizScatterplot">
+    <p>
+    <div class="w3-margin-64 w3-container">
+        <h5 class="w3-center">Preis - Kilometerstand</h5>
+        <svg id="ScaterplotKmPrice" width="1024" height="900"></svg>
 
+    </div>
+
+    </p>
+</div>
+
+<div class="w3-content w3-container w3-padding-64" id="vizBarchart">
+<svg id="Barplot" width="1024" height="900"></svg>
+</div>
+
+</div>
+
+<!-- Load Visualisation Scripts-->
+<script src="./js/Visualisation.js"></script>
 
 <!-- SECTION DESIGN -->
+<div class="w3-content w3-container w3-padding-64" id="design">
+    <h3 class="w3-center" style="font-weight: bold;">Design</h3>
+    <p>Designentscheidungen</br>
+        Um den Untersuchungsgegenstand in Form der Frage: «Wie haben sich die Verkäufe von Autos über Autoscout24 zwischen 2011-2021, 
+        insbesondere in Bezug auf die Motorart verändert? » zu untersuchen, habe wir uns folgende Überlegungen gemacht. 
+        <br>
+        <br>
+        Die Grundlagen des visuellen Designs leiten unsere Wahl von Farben und Anordnung, um die Daten nicht 
+        nur visuell ansprechend, sondern auch verständlich zu machen. Zum Beispiel repräsentieren unterschiedliche 
+        Farben die verschiedenen Aspekte und tragen somit zur schnellen Erkennbarkeit bei. 
+        <br>
+        <br>
+        Edward Tufte's fundamentale Prinzipien des analytischen Designs beeinflussen massgeblich 
+        unsere Entscheidung für die Treemap, den Scatterplot und das Balkendiagramm. Tufte betont die Wichtigkeit, Daten mit Genauigkeit und Effizienz 
+        darzustellen, was uns dazu veranlasst, die Grösse der einzelnen Bereiche genau proportional zum Marktanteil 
+        jeder Marke zu gestalten. So wird eine hohe Informationsdichte erreicht, die es den Betrachtenden erlaubt, 
+        Markttrends, trotzt vieler Marken, auf einen Blick zu erfassen. Die drei Gewählten Visualisierungen sind allgemein bekannt und 
+        für Nutzende einfach zu verstehen und interpretieren. 
+        <br>
+        <br>
+        Das Konzept der Data-Ink Ratio, unterstützt unser Bestreben, unnötige grafische 
+        Elemente zu vermeiden. Aus diesem Grund ist das Design der Visualisationen simpel und ohne unnötige 
+        Dekoration gestaltet. 
+        <br>
+        <br>
+        Die menschliche Wahrnehmung spielt eine entscheidende Rolle in unserem Designprozess. 
+        Die Visualisationen sind so gestaltet, dass sie den natürlichen Sehgewohnheiten entsprechen, 
+        mit grosszügigen, gut lesbaren Beschriftungen und einer intuitiven Anordnung, die es den 
+        Nutzenden ermöglicht, Muster und Veränderungen zu erkennen. 
+        <br>
+        <br>
+        Schliesslich integrieren wir ein Interaktionskonzept, das es ermöglicht, 
+        durch Berührung oder Mauszeiger zusätzliche Daten einzusehen. Dies bietet einen Mehrwert für 
+        Nutzer, die tiefer in die Daten eintauchen möchten, ohne die allgemeine Übersichtlichkeit zu beeinträchtigen.
 
-        <div class="w3-content w3-container w3-padding-64" id="ref">
-            <h3 class="w3-center">References</h3>
-            <p>&DAVI& Untertitel<br/>
-                &DAVI& Wo hast du was geklaut?, die Website hier ist von W3.org, einfach in einer viel weniger fancy-version
-            </p>
-        </div>  
-<!-- SECTION DESIGN -->
+    </p>
+    <br>
+</div>
 
-        <div class="w3-content w3-container w3-padding-64" id="Team">
-            <h3 class="w3-center">Team</h3>
-            <p>&DAVI& Untertitel<br/>
-                &DAVI& Kontaktdaten des Teams
-            </p>
-        </div>  
+<!-- SECTION REFERENZEN -->
+<div class="w3-content w3-container w3-padding-64" id="ref">
+    <h3 class="w3-center">Referenzen</h3>
+    <p>Quellen<br />
+        Slideshow der Autos: https://codepen.io/Hyperplexed/full/MWXBRBp <br />
+        Datenset: https://www.kaggle.com/datasets/ander289386/cars-germany <br />
+        Visualisierungen: https://d3-graph-gallery.com/
 
-    </body>
+
+    </p>
+
+</div>
+
+<!-- SECTION Team -->
+
+<div class="w3-content w3-container w3-padding-64" id="Team">
+    <h3 class="w3-center">Team</h3>
+    <p> Leander Duft <br> Sarah Kovacs
+    </p>
+</div>
 
 </html>
