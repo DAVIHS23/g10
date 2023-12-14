@@ -161,7 +161,7 @@ function createtooltipTreeMap() {
 
 function renderScatterplot(data){
 
-  var xScale = d3.scaleLinear()
+var xScale = d3.scaleLinear()
   .domain([0, d3.max(data, function(d) { return d.price; })])
   .range([0, 1000]);
 
@@ -172,15 +172,15 @@ var yScale = d3.scaleLinear()
   var svgScatterPlot = d3.select("#ScaterplotKmPrice");
   
   
-  svgScatterPlot.append("svg")
+svgScatterPlot.append("svg")
   .attr("width", width + margin.left + margin.right )
   .attr("height", height + margin.top + margin.bottom)
-.append("g")
+  .append("g")
   .attr("transform",
         "translate(" + margin.left + "," + margin.top + ")");
 
-  //Add Points to SVG ScatterPlot
-  svgScatterPlot.selectAll("circle")
+//Add Points to SVG ScatterPlot
+svgScatterPlot.selectAll("circle")
   .data(data)
   .enter()
   .append("circle")
@@ -202,7 +202,7 @@ svgScatterPlot.append("text")
   .attr("transform", "translate(250, 480)")
   .text("Preis");
 
-  svgScatterPlot.append("text")
+svgScatterPlot.append("text")
   .attr("transform", "rotate(-90)")
   .attr("y", -10)
   .attr("x", -250)
