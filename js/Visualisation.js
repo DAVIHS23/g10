@@ -24,27 +24,33 @@ output.innerHTML = "Verkausjahr auf Autoscout24: "+slider.value;
 //Get Data / Transform Data in JS Objects und aufruf der Draw Visuals Funktionen
 d3.csv("data/autoscout24-germany-dataset.csv", function(data) {
 
-    drawTreeMap(data);
-    renderScatterplot(data);
+    drawVisuals(data);
+
 });
 
 //TReemap  mit Marken pro Listen Jahr 
-function drawTreeMap(data){
+function drawVisuals(data){
 
   select = d3.select("#SliderRegistrationYear");
       select.on("change", function () {
           const year = this.value;
           console.log("Selected year: " + year);
           output.innerHTML = "Jahr der Listung auf Autoscout24: "+this.value;
-          let groupedData = TreeMapFilter(data, year);
+          let groupedData = yearGroupedFilter(data, year);
+          let filterdata = yearFilter(data, year);
           renderTreeMapMake(groupedData);
+          renderScatterplot(filterdata);
       });
-  let groupedData = TreeMapFilter(data, slider.value);
+  let groupedData = yearGroupedFilter(data, slider.value);
+  let filterdata = yearFilter(data, slider.value);
   renderTreeMapMake(groupedData);
+  renderScatterplot(filterdata);
   }
 
+
+
 //Filterdata for Listenjahr, returns filterd and GroupedData (nach Marke gruppiert)
-function TreeMapFilter(data, year){
+function yearGroupedFilter(data, year){
   
   console.log("Original Objects", data);
 
@@ -66,6 +72,19 @@ function TreeMapFilter(data, year){
         console.log("GroupedData Filtered:", groupedData); 
         
   return groupedData;
+}
+
+
+//Filterdata for Listenjahr, returns filterd data year
+function yearFilter(data, year){
+  
+  console.log("Original Objects into year filter", data);
+
+  data = data.filter(function(d){ return d.year == year});
+
+  console.log("year filtered", data);
+         
+  return data;
 }
 
 
@@ -131,7 +150,7 @@ function renderTreeMapMake(groupedData){
 }       
 
 //Event für Mousover Tooltip Tree Map
-d3.selectAll("svg")
+d3.selectAll("#treeMapMake")
 .on("mousemove touchmove", createtooltipTreeMap);
 
 //Display Tooltip Treemap
@@ -163,11 +182,11 @@ function renderScatterplot(data){
 
 var xScale = d3.scaleLinear()
   .domain([0, d3.max(data, function(d) { return d.price; })])
-  .range([0, 1000]);
+  .range([0, width]);
 
 var yScale = d3.scaleLinear()
   .domain([0, d3.max(data, function(d) { return d.mileage; })])
-  .range([500, 0]);
+  .range([0, 200]);
 
   var svgScatterPlot = d3.select("#ScaterplotKmPrice");
   
@@ -180,17 +199,21 @@ svgScatterPlot.append("svg")
         "translate(" + margin.left + "," + margin.top + ")");
 
 //Add Points to SVG ScatterPlot
+svgScatterPlot.selectAll("circle").remove();
+
 svgScatterPlot.selectAll("circle")
   .data(data)
   .enter()
   .append("circle")
   .attr("cx", function(d) { return xScale(d.price); })
   .attr("cy", function(d) { return yScale(d.mileage); })
-  .attr("r", 2); // radius of circles
+  .attr("r", 5); // radius of circles
   
+//remove g
+svgScatterPlot.selectAll("g").remove();
 // Add x-axis
 svgScatterPlot.append("g")
-  .attr("transform", "translate(0, 1000)")
+  .attr("transform", "translate(0, "+height+")")
   .call(d3.axisBottom(xScale));
 
 // Add y-axis
@@ -199,16 +222,23 @@ svgScatterPlot.append("g")
 
 // Add labels
 svgScatterPlot.append("text")
-  .attr("transform", "translate(250, 480)")
+  .attr("transform", "translate("+width/2+", -6)")
   .text("Preis");
 
 svgScatterPlot.append("text")
   .attr("transform", "rotate(-90)")
-  .attr("y", -10)
-  .attr("x", -250)
+  .attr("y", height/2)
+  .attr("x", 0)
   .text("Kilometerstand");
 
 }
+
+
+//Event für Mouseclick Tree Map Marke
+//d3.selectAll("#treeMapMake")
+//.on("onclick", updateScatter);
+
+//Funktion Update Scatterdata
 
 
 //Balkendiagramm 
@@ -224,6 +254,7 @@ var svg_bp = d3.select("Barplot")
 // Parse the Data
 d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/7_OneCatOneNum_header.csv", function(daten) {
 
+console.log("draw Bar");
 // X axis
 var x = d3.scaleBand()
   .range([ 0, width ])
