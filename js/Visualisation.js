@@ -1,11 +1,23 @@
-//Margin und Grössen des Visuals
+//Margin und Grössen des Visuals Treemap
 var margin = {top: 10, right: 10, bottom: 10, left: 10},
   width = 1024 - margin.left - margin.right,
-  height = 900 - margin.top - margin.bottom;
+  height = 800 - margin.top - margin.bottom;
 
 
+//Treemap data
+var groupedData = null;
 
-// Append SVG
+// set the dimensions and margins of the Barplot Visual Motortypebymake
+var marginBP = {top: 100, right: 30, bottom: 70, left: 80},
+widthBP = 600 - marginBP.left - marginBP.right,
+heightBP = 600 - marginBP.top - marginBP.bottom;
+
+// BPData on Click Update
+var BPData = null;
+var choosenmake = null;
+
+
+// Append SVG Treemap
 var svg = d3.select("#treeMapMake")
 .append("svg")
   .attr("width", width + margin.left + margin.right)
@@ -15,10 +27,23 @@ var svg = d3.select("#treeMapMake")
         "translate(" + margin.left + "," + margin.top + ")");
 
 
+// append the svg for BarPlot 
+var svgBarMotorTypeByMake = d3.select("#BarMotorTypeByMake")
+.append("svg")
+  .attr("width", widthBP + marginBP.left + marginBP.right)
+  .attr("height", heightBP + marginBP.top + marginBP.bottom)
+.append("g")
+  .attr("transform",
+        "translate(" + marginBP.left + "," + marginBP.top + ")");
+
+
 //Slider mit Standart Wert
 var slider = document.getElementById("SliderRegistrationYear");
 var output = document.getElementById("OutputSlider");
 output.innerHTML = "Verkausjahr auf Autoscout24: "+slider.value;
+
+//Title Bar Plot
+var OutputTitleBP = document.getElementById("OutputTitleBP");
         
 
 //Get Data / Transform Data in JS Objects und aufruf der Draw Visuals Funktionen
@@ -28,31 +53,65 @@ d3.csv("data/autoscout24-germany-dataset.csv", function(data) {
 
 });
 
-//TReemap  mit Marken pro Listen Jahr 
+//Draw All Visuals
 function drawVisuals(data){
+
+
 
   select = d3.select("#SliderRegistrationYear");
       select.on("change", function () {
           const year = this.value;
           console.log("Selected year: " + year);
           output.innerHTML = "Jahr der Listung auf Autoscout24: "+this.value;
-          let groupedData = yearGroupedFilter(data, year);
+          groupedData = yearGroupedFilter(data, year);
           let filterdata = yearFilter(data, year);
+         
+
           renderTreeMapMake(groupedData);
           renderScatterplot(filterdata);
+
+          if (choosenmake==null) {
+            renderBarPlotMotortypebyMake(data);
+          }else{
+            UpdateBarplotbyMake(choosenmake)
+          }
+
+
+          
       });
   let groupedData = yearGroupedFilter(data, slider.value);
   let filterdata = yearFilter(data, slider.value);
+
   renderTreeMapMake(groupedData);
   renderScatterplot(filterdata);
+
+  renderBarPlotMotortypebyMake(data);
+
+ 
   }
 
+  function BPMakeFilter(data, year){
+    console.log("Original Objects", data);
+    data = data.filter(function(d){ return d.year == year});
+    data = data.filter(function(d){ return d.fuel == "Diesel" || d.fuel == "Gasoline" || d.fuel == "Electric" || d.fuel == "Electric/Gasoline"});
+
+  var groupedData = d3.nest()
+  .key(function(d) { return d.fuel; })
+  .rollup(function(leaves) {
+    return leaves.length
+  })
+  .entries(data);
+  groupedData = groupedData.sort(function(a, b) { return b.value - a.value; })
+
+  console.log("BP Motortype Data :", groupedData); 
+  return groupedData;
+  }
 
 
 //Filterdata for Listenjahr, returns filterd and GroupedData (nach Marke gruppiert)
 function yearGroupedFilter(data, year){
   
-  console.log("Original Objects", data);
+  
 
   data = data.filter(function(d){ return d.year == year});
   // Gruppiere die Daten nach der Marken-Spalte
@@ -130,8 +189,15 @@ function renderTreeMapMake(groupedData){
       .attr('y', function(d) { return d.y0; })
       .attr('width', function(d) { return d.x1 - d.x0; })
       .attr('height', function(d) { return d.y1 - d.y0; })
-      .attr('fill', '#91bbff')
-      .attr('stroke', 'white');
+      //.attr('fill', '#91bbff')
+      .attr('stroke', 'white')
+      .attr("fill", function (d) {
+        if(d.data.key==choosenmake) {
+           return "#36454F"; // Get fill of current item
+        } else {
+          return "#91bbff"
+        }
+      });
 
     entering.append("text")
       .data(root.leaves())
@@ -152,6 +218,9 @@ function renderTreeMapMake(groupedData){
 //Event für Mousover Tooltip Tree Map
 d3.selectAll("#treeMapMake")
 .on("mousemove touchmove", createtooltipTreeMap);
+
+d3.selectAll("#treeMapMake")
+.on("mouseleave", hideTooltip);
 
 //Display Tooltip Treemap
 function createtooltipTreeMap() {
@@ -176,6 +245,14 @@ function createtooltipTreeMap() {
           <p>Anzahl Verkäufe: ${data.value}</p>
         `);
   }
+}
+
+
+//Hide Tooltip Treemap
+function hideTooltip() {
+  var tooltip = d3.select(".tooltip");
+    tooltip
+      .style("opacity", 0);
 }
 
 function renderScatterplot(data){
@@ -234,56 +311,127 @@ svgScatterPlot.append("text")
 }
 
 
-//Event für Mouseclick Tree Map Marke
-//d3.selectAll("#treeMapMake")
-//.on("onclick", updateScatter);
-
-//Funktion Update Scatterdata
+ //Event für Mouseclick Tree Map Marke
+ d3.select("#treeMapMake")
+ .on("click", HandleClickTreemap);
 
 
-//Balkendiagramm 
-// append the svg object to the body of the page
-var svg_bp = d3.select("Barplot")
-  .append("svg_bp")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-  .append("g")
-    .attr("transform",
-          "translate(" + margin.left + "," + margin.top + ")");
+//Update Bar Plot (after Click)
+function HandleClickTreemap() {
 
-// Parse the Data
-d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/7_OneCatOneNum_header.csv", function(daten) {
+  console.log("Clik Event",d3.event);
+    var tgt = d3.select(d3.event.target);
 
-console.log("draw Bar");
-// X axis
-var x = d3.scaleBand()
-  .range([ 0, width ])
-  .domain(daten.map(function(d) { return d.Country; }))
+  var data = tgt.data()[0];
+
+  if (typeof data === 'undefined') {
+    
+  } else {
+
+    if(choosenmake == data.data.key){
+      //Deselect on Treemap
+      choosenmake = null;
+    }else{
+      //Select on Treemap
+      choosenmake = data.data.key;
+    }
+
+      
+    if(choosenmake != null){
+    OutputTitleBP.innerHTML = "Motor Vergleich : "+choosenmake;
+      
+    }else{
+      OutputTitleBP.innerHTML = "Motor Vergleich : Alle Marken";
+    }
+      
+      
+      d3.csv("data/autoscout24-germany-dataset.csv", function(data) {
+
+        BPData = data;
+
+        let year = slider.value;
+        groupedData = yearGroupedFilter(data, year);
+        renderTreeMapMake(groupedData);
+
+
+        if(choosenmake != null){
+        UpdateBarplotbyMake(choosenmake);
+        } else{
+          renderBarPlotMotortypebyMake(data);
+        }
+        
+      });
+  }
+}
+
+function UpdateBarplotbyMake(choosenmake){
+
+  BPData = BPData.filter(function(d){ return d.make == choosenmake});
+  renderBarPlotMotortypebyMake(BPData);
+}
+
+function renderBarPlotMotortypebyMake(data){
+  
+  let year = slider.value;
+  data =  BPMakeFilter(data, year);
+
+  //Remove Visual Points from SVG Bar Plot
+  svgBarMotorTypeByMake.selectAll("g").remove();
+  svgBarMotorTypeByMake.selectAll("rect").remove();
+  svgBarMotorTypeByMake.selectAll("text").remove();
+  // X axis
+  var xBP = d3.scaleBand()
+  .range([ 0, widthBP ])
+  .domain(data.map(function(d) { return d.key; }))
   .padding(0.2);
-svg_bp.append("g")
-  .attr("transform", "translate(0," + height + ")")
-  .call(d3.axisBottom(x))
-  .selectAll("text")
-    .attr("transform", "translate(-10,0)rotate(-45)")
-    .style("text-anchor", "end");
+  svgBarMotorTypeByMake.append("g")
+  .attr("transform", "translate(0," + heightBP + ")")
+  .call(d3.axisBottom(xBP))
 
-// Add Y axis
-var y = d3.scaleLinear()
-  .domain([0, 13000])
-  .range([ height, 0]);
-svg_bp.append("g")
-  .call(d3.axisLeft(y));
 
-// Bars
-svg_bp.selectAll("mybar")
-  .data(daten)
-  .enter()
-  .append("rect")
-    .attr("x", function(d) { return x(d.Country); })
-    .attr("y", function(d) { return y(d.Value); })
-    .attr("width", x.bandwidth())
-    .attr("height", function(d) { return height - y(d.Value); })
-    .attr("fill", "#69b3a2")
+  // Add Y axis
+  let maxY = d3.max(data, d => d.value);
 
-})
+  let TotalCount = data.reduce((accumulator, object) => {
+    return accumulator + object.value;
+  }, 0);
+  console.log("TotalCount BP",TotalCount)
+
+  var yBP = d3.scaleLinear()
+  .domain([0, maxY])
+  .range([ heightBP, 0]);
+  svgBarMotorTypeByMake.append("g")
+  .attr("class", "myYaxis")
+  .call(d3.axisLeft(yBP));
+
+
+ var u = svgBarMotorTypeByMake.selectAll("rect")
+   .data(data)
+
+ u
+   .enter()
+   .append("rect")
+   .merge(u)
+   .transition()
+   .duration(500)
+     .attr("x", function(d) { return xBP(d.key); })
+     .attr("y", function(d) { return yBP(d.value); })
+     .attr("width", xBP.bandwidth())
+     .attr("height", function(d) { return heightBP - yBP(d.value); })
+     .attr("fill", "#69b3a2")
+
+  
+  u
+     .enter()
+     .append("text")
+     .text(function(d){return d.value+ " | "+((d.value/TotalCount)*100).toPrecision(2)+"%";})
+     .attr("x", function(d) { return xBP(d.key)+xBP.bandwidth()/2;})
+     .attr("y", function(d) { return yBP(d.value)-5;})
+     .attr("text-anchor", "middle");
+}
+
+
+
+
+
 

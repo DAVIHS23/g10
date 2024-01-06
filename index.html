@@ -26,7 +26,6 @@
                 <i class="fa fa-bars"></i>
             </a>
             <a href="#home" class="w3-bar-item w3-button">HOME</a>
-            <a href="#info" class="w3-bar-item w3-button">Projektinfo</a>
             <a href="#data" class="w3-bar-item w3-button">Datenset</a>
             <a href="#viz" class="w3-bar-item w3-button">Visualisation</a>
             <a href="#design" class="w3-bar-item w3-button">Design</a>
@@ -92,18 +91,31 @@
 
 <!-- SECTION VISUALIZATION -->
 
-<div class="w3-content w3-container w3-padding-64" id="viz">
+<div class="w3-container" id="viz">
     <h3 class="w3-center">Visualization</h3>
-    <p>
-
-    <div class="tooltip"></div>
-    <div class="slidecontainer w3-margin-64">
-
-        <h5 class="w3-center" id="OutputSlider">Verkaufsjahr auf Autoscout24:</h5>
-        <input type="range" min="2011" max="2021" value="2011" class="slider" id="SliderRegistrationYear">
+    <h5 class="w3-center" id="OutputSlider">Verkaufsjahr auf Autoscout24:</h5>
+    <div class="w3-row">
+        <div class="w3-col m2 w3-container " >
+        </div>
+        <div class="w3-col w3-margin-64 m8  ">
+            <input type="range" min="2011" max="2021" value="2011" class="slider w3-center" id="SliderRegistrationYear">
+        </div>
+        <div class="w3-col m2 w3-container " >
+        </div>
+        </div>
+        
     </div>
-    <svg id="treeMapMake" width="1024" height="900"></svg>
-
+    <div class="w3-row">
+        <div class="w3-col l6 w3-container">
+            <div class="tooltip"></div>
+            <h5 class="w3-center">Übersicht Verkaufte Fahrezuge:</h5>
+            <svg id="treeMapMake" width="1024" height="900"></svg>
+        </div>
+        <div class="w3-col l6  w3-container">
+            <h5 class="w3-center" id="OutputTitleBP">Motor Vergleich : Alle Marken</h5>
+            <svg id="BarMotorTypeByMake" width="600" height="600"></svg>
+        </div>
+    </div>
     </p>
 
 </div>

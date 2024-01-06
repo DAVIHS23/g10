@@ -44,13 +44,11 @@ body, html {
   margin: 3px;
 }
 
-.slidecontainer {
-  width: 100%;
-}
+
 
 .slider {
   -webkit-appearance: none;
-  width: 100%;
+  width: 60%;
   height: 25px;
   background: #91bbff;
   outline: none;
