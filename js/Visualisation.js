@@ -418,8 +418,14 @@ function renderBarPlotMotortypebyMake(data){
      .attr("y", function(d) { return yBP(d.value); })
      .attr("width", xBP.bandwidth())
      .attr("height", function(d) { return heightBP - yBP(d.value); })
-     .attr("fill", "#69b3a2")
-
+     .attr("fill", function (d) {
+      if(choosenmake!=null) {
+         return "#36454F"; // Get fill of current item
+      } else {
+        return "#91bbff"
+      }
+    });
+//#91bbff
   
   u
      .enter()
