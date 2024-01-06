@@ -338,10 +338,10 @@ function HandleClickTreemap() {
 
       
     if(choosenmake != null){
-    OutputTitleBP.innerHTML = "Motor Vergleich : "+choosenmake;
+    OutputTitleBP.innerHTML = "Motor Vergleich : <b>"+choosenmake+"</b>";
       
     }else{
-      OutputTitleBP.innerHTML = "Motor Vergleich : Alle Marken";
+      OutputTitleBP.innerHTML = "Motor Vergleich : <b>Alle Marken </b>";
     }
       
       
