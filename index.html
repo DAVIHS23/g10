@@ -190,22 +190,85 @@
 <!-- SECTION REFERENZEN -->
 <div class="w3-content w3-container w3-padding-64" id="ref">
     <h3 class="w3-center">Referenzen</h3>
-    <p>Quellen<br />
-        Slideshow der Autos: https://codepen.io/Hyperplexed/full/MWXBRBp <br />
-        Datenset: https://www.kaggle.com/datasets/ander289386/cars-germany <br />
-        Visualisierungen: https://d3-graph-gallery.com/
+    <div class="tab">
+        <button class="tablinks" onclick="openQuelle(event, 'Quelle1')" id="defaultOpen">Code Hilfen</button>
+        <button class="tablinks" onclick="openQuelle(event, 'Quelle2')">Datenset</button>
+        <button class="tablinks" onclick="openQuelle(event, 'Quelle3')">Visualisationen</button>
+        <button class="tablinks" onclick="openQuelle(event, 'Quelle4')">Bilder</button>
+ </div>
+
+        <div id="Quelle1" class="tabcontent">
+            <h4>Slideshow der Autos</h4>
+            <link> https://codepen.io/Hyperplexed/full/MWXBRBp</link>
+            <h4>Quellendarstellung</h4>
+            <link> https://www.w3schools.com/howto/howto_js_vertical_tabs.asp</link>
+            <h4>Karten der Autoren</h4>
+            <link>  https://www.w3schools.com/howto/howto_css_cards.asp</link>
+            <h4>Hilfe bei Debugging und Darstellung</h4>
+            <link>https://chat.openai.com/auth/login</link>
 
 
-    </p>
+        </div>
 
+        <div id="Quelle2" class="tabcontent">
+            <h4>Datenset</h4>
+            <p>https://www.kaggle.com/datasets/ander289386/cars-germany</p>
+        </div>
+
+        <div id="Quelle3" class="tabcontent">
+            <h4>Visualisationen</h4>
+            <p>https://d3-graph-gallery.com/</p>
+        </div>
+
+        <div id="Quelle4" class="tabcontent">
+            <h4>Bilder Autos</h4>
+            <p>https://www.design-fieldtrip.com/read/2023-bmw-7-series-i7-car-design-analysis<br>
+                https://auto360.de/bugatti-chiron-faehrt-weltrekord-0-400-0-kmh-in-42-sekunden <br>
+                https://www.carpixel.net/wallpapers/19593/2020-mercedes-amg-glc-43-us.html <br>
+                https://auto.goodfon.com/ford/wallpaper-ford-mustang-shelby-gt350r-2016.html <br>
+                https://www.autoblog.com/2021/07/26/2022-porsche-cayenne-turbo-gt-review/ <br>
+                https://www.topgear.com/car-reviews/porsche/taycan/420kw-4s-93kwh-4dr-auto/first-drive <br>
+                https://www.teslarati.com/tag/tsla/page/10/ <br> 
+                https://www.cars.com/articles/2020-toyota-camry-whats-changed-419504/ <br> 
+                https://carbuzz.com/cars/volvo/s90-hybrid/2019 <br> 
+                https://www.carpixel.net/wallpapers/20590/2021-volkswagen-arteon-r-line-us.html <br> </p>
+        </div>
+   
 </div>
+
+ <script src="js/Quellen.js" defer></script>
 
 <!-- SECTION Team -->
 
 <div class="w3-content w3-container w3-padding-64" id="Team">
     <h3 class="w3-center">Team</h3>
-    <p> Leander Duft <br> Sarah Kovacs
-    </p>
+    <div class="card-container">
+        <!-- Neuer Container für Karten -->
+        <div class="card">
+            <img class="leanderimg" src="images/leander.png" alt="Avatar">
+            <div class="container">
+                <h4><b>Leander Duft</b></h4>
+                <p>BSc Wirtschaftsinformatik <br>
+                    5. Semester <br>
+                    leander.duft@stud.hslu.ch <br>
+                    <br>
+                    Major: Data Science & Data Engineering <br> 
+            </div>
+        </div>
+        <div class="card">
+            <img class="leanderimg" src="images/sarah.png" alt="Avatar">
+            <div class="container">
+                <h4><b>Sarah Kovacs</b></h4>
+                <p>BSc Wirtschaftsinformatik <br>
+                    5. Semester <br>
+                    sarah.kovacs@stud.hslu.ch <br>
+                    <br>
+                    Major: Informatik PLUS Medizintechnik 
+
+                </p>
+            </div>
+        </div>
+    </div>
 </div>
 
 </html>
