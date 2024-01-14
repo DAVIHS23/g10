@@ -261,9 +261,15 @@ var xScale = d3.scaleLinear()
   .domain([0, d3.max(data, function(d) { return d.price; })])
   .range([0, width]);
 
+console.log("Scatterdata",data);
+
+let mxMileage = d3.max(data, function(d) { return d.mileage; });
+let mnMileage = d3.min(data, function(d) { return d.mileage; });
+console.log("Maximale KM",mxMileage);
+console.log("Minimale KM",mnMileage);
 var yScale = d3.scaleLinear()
-  .domain([0, d3.max(data, function(d) { return d.mileage; })])
-  .range([0, 200]);
+  .domain([mxMileage, mnMileage])
+  .range([0, height]);
 
   var svgScatterPlot = d3.select("#ScaterplotKmPrice");
   
@@ -284,7 +290,7 @@ svgScatterPlot.selectAll("circle")
   .append("circle")
   .attr("cx", function(d) { return xScale(d.price); })
   .attr("cy", function(d) { return yScale(d.mileage); })
-  .attr("r", 5); // radius of circles
+  .attr("r", 2); // radius of circles
   
 //remove g
 svgScatterPlot.selectAll("g").remove();
@@ -295,11 +301,12 @@ svgScatterPlot.append("g")
 
 // Add y-axis
 svgScatterPlot.append("g")
+  .attr("transform", "translate("+50+", "+0+")")
   .call(d3.axisLeft(yScale));
 
 // Add labels
 svgScatterPlot.append("text")
-  .attr("transform", "translate("+width/2+", -6)")
+  .attr("transform", "translate("+width/2+", 20)")
   .text("Preis");
 
 svgScatterPlot.append("text")
@@ -314,7 +321,6 @@ svgScatterPlot.append("text")
  //Event für Mouseclick Tree Map Marke
  d3.select("#treeMapMake")
  .on("click", HandleClickTreemap);
-
 
 //Update Bar Plot (after Click)
 function HandleClickTreemap() {
