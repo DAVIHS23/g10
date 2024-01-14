@@ -89,6 +89,35 @@
     <div><img class="datasetimage" src="images/dataset.png" /></div>
 </div>
 
+  <!-- SECTION SKIZZE   -->
+  <div class="w3-content w3-container w3-padding-64" id="data">
+    <h3 class="w3-center" style="font-weight: bold;">Skizze</h3>
+    <p>
+        Die Skizze zeigt die geplante Visualisierung des Datensets. Um eine allgemeine Übersicht über den Markt zu erhalten wird ein Treemap verwendet. 
+        Dies ist mit einem Slider verbunden, welcher zwischen dem Jahr 2011 und 2021 verschoben werden kann. Das Treemap zeigt die meistverkauften Marken auf 
+        Autoscout24 für das aufgewählte Jahr. Wenn der Slider bewegt wird verändert sich das Treemap dynamisch. So kann eine veränderung über die Jahre schnell und 
+        effektiv dargestellt werden. Neben dem Treemap befindet sich ein Balkendiagramm, welches die Motortypen der verkauften Autos darstellt. Es ist ebenfalls mit dem 
+        Slider verbunden und hilft so auf einen Blick ein Verständnis für den Autoverkaufsmarkt sowie die Veränderung der Motortypen. <br>
+        <br>
+        Die beiden Visualisationen sind miteinander mit einem Zoom-Effekt verbunden. Wenn auf eine Automarke im Treemap geklickt wird, zeigt das Barplot die Verteilung
+        der Motortypen für die ausgewählte Marke an. 
+        <br><br>
+        Im unteren Teil kann der Markt genauer betrachtet werden. Durch die Auswahl einer Marke, werden deren Modelle in einem Barplot angezeigt. 
+        Die Farbe der Balken im Barplot wiederspiegeln die Motortypen des Modells. Eine Farblegende ermöglicht ein schneller Einordnen der Informationen. <br>
+        <br>
+
+    </p>
+  </div>
+  <div class="w3-center">
+    <div><img class="skizze" src="images/skizze.png" /></div>
+ 
+    <br>
+    <br>
+ </div>
+
+    
+
+
 <!-- SECTION VISUALIZATION -->
 
 <div class="w3-container" id="viz">
@@ -113,7 +142,7 @@
         <div class="w3-col l6 w3-container ">
             <div class="tooltip"></div>
             <h5 class="w3-center"><b>Anzahl Verkaufte Fahrezuge:</b></h5>
-            <svg id="treeMapMake" width="1024" height="900"></svg>
+            <svg id="treeMapMake" width="600" height="600"></svg>
         </div>
         <div class="w3-col l1 w3-container "></div>
         <div class="w3-col l5  w3-container ">
@@ -144,8 +173,26 @@
 
 </div>
 
+<div class="w3-row w3-padding-large">
+    <br>
+    <div class="w3-col l9  w3-container ">
+        <br>
+        <h5 class="w3-center"><b>Marke Auswählen:</b></h5>
+        <h5 class="w3-center">
+            <select id="makedropdown">
+                <option data-value="">Wähle eine Marke</option>
+               
+            </select>
+        </h5>
+        <svg id="ModelBarplot" width="700" height="500"></svg>
+
+    </div>
+
+</div>
+
 <!-- Load Visualisation Scripts-->
-<script src="./js/Visualisation.js"></script>
+<script src="js/Visualisation.js"></script>
+<script src="js/Vis.js"></script>
 
 <!-- SECTION DESIGN -->
 <div class="w3-content w3-container w3-padding-64" id="design">
@@ -156,9 +203,23 @@
             <div class="projcard-innerbox">
                 <img class="projcard-img" src="images/treem.png" />
                 <div class="projcard-textbox">
-                    <div class="projcard-title">Treemap</div>
+                    <div class="projcard-title">Treemap - Design</div>
                     <div class="projcard-bar"></div>
-                    <div class="projcard-description">Für das Treemap haben wir uns entschieden, weil es den Deutschen Gebrauchtwagenmarkt nach Marken übersichtlich und effizient darstellt. Es nutzt den Raum optimal und präsentiert komplexe Informationen klar und präzise entsprechend den Prinzipien des analytischen Designs nach Tufte. Die Grössenunterschiede der Rechtecke erleichtern das Verständnis für die Marktanteile. Zudem fördert die Interaktivität des Treemaps eine detaillierte Auseinandersetzung mit den Daten.</div>
+                    <div class="projcard-description">Für das Treemap haben wir uns entschieden, weil es den Deutschen Gebrauchtwagenmarkt nach Marken übersichtlich und effizient darstellt. Es nutzt den Raum optimal und präsentiert komplexe Informationen klar und präzise entsprechend den Prinzipien des analytischen Designs nach Tufte. Die Grössenunterschiede der Rechtecke erleichtern das Verständnis für die Marktanteile. Der Entscheid das Treemap einfarbig zu halten hilft dem Nutzer sich auf die wichtigste Aussage des Diagramms hervorzuheben den Marktanteil der Marken. 
+                    </div>
+                  
+                </div>
+            </div>
+        </div>
+
+        <div class="projcard projcard-blue">
+            <div class="projcard-innerbox">
+                <img class="projcard-img" src="images/treem.png" />
+                <div class="projcard-textbox">
+                    <div class="projcard-title">Treemap - Interaktivität</div>
+                    <div class="projcard-bar"></div>
+                    <div class="projcard-description">
+                        Zudem fördert die Interaktivität des Treemaps eine detaillierte Auseinandersetzung mit den Daten und ermöglicht es das Dashboard explorativ zu erkunden. Das Interaktionskonzept wird durch die Auswahl der Marke durch das Klicken und die gemeinsame Änderung der Farbe in der Treemap Kachel der Automarke und der Farbänderung im Balkendiagramm dass ein Filter aktiv ist, sichtbar. </div>
                   
                 </div>
             </div>
@@ -170,7 +231,18 @@
                 <div class="projcard-textbox">
                     <div class="projcard-title">Barplot</div>
                     <div class="projcard-bar"></div>
-                    <div class="projcard-description">Das Balkendiagramm zur Visualisierung der Motortypen ist effektiv, weil es nach den Prinzipien von Tufte klar und effizient Daten darstellt. Es nutzt das hohe Daten-Tinten-Verhältnis, um wichtige Informationen ohne Überflüssiges zu präsentieren. Die menschliche Fähigkeit, Längenunterschiede schnell zu erfassen, wird optimal genutzt, was die Analyse der Motortypen vereinfacht. Die Interaktivität, die es erlaubt, durch Klicken auf eine Marke spezifische Daten zu sehen, bietet detaillierte Einsichten.</div>
+                    <div class="projcard-description">Die Balkendiagramme zur Visualisierung der Motortypen und der Modelle ist effektiv, weil es nach den Prinzipien von Tufte klar und effizient Daten darstellt. Es nutzt das hohe Daten-Tinten-Verhältnis, um wichtige Informationen ohne Überflüssiges zu präsentieren. Die menschliche Fähigkeit, Längenunterschiede schnell zu erfassen, wird optimal genutzt, was die Analyse der Informationen vereinfacht.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="projcard projcard-red">
+            <div class="projcard-innerbox">
+                <img class="projcard-img" src="images/barplot.png" />
+                <div class="projcard-textbox">
+                    <div class="projcard-title">Slider</div>
+                    <div class="projcard-bar"></div>
+                    <div class="projcard-description">Weitere Interaktivität mit dem Dashboard bietet der Slider welcher die Diagramme eine Filtermöglichkeit für die Jahre von 2011 - 2021 bietet. Der Filter bleibt auch aktiv sollte ein Markenfilter aktiv sein. Dies hilft der besseren Vergleichbarkeit im Beriech der Motortypen des Balkendiagrammes.</div>
                 </div>
             </div>
         </div>

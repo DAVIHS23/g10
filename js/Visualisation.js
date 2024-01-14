@@ -1,7 +1,7 @@
 //Margin und Grössen des Visuals Treemap
 var margin = {top: 10, right: 10, bottom: 10, left: 10},
-  width = 1024 - margin.left - margin.right,
-  height = 800 - margin.top - margin.bottom;
+  width = 600 - margin.left - margin.right,
+  height = 600 - margin.top - margin.bottom;
 
 
 //Treemap data
@@ -189,13 +189,13 @@ function renderTreeMapMake(groupedData){
       .attr('y', function(d) { return d.y0; })
       .attr('width', function(d) { return d.x1 - d.x0; })
       .attr('height', function(d) { return d.y1 - d.y0; })
-      //.attr('fill', '#91bbff')
+      //.attr('fill', '#4D8E9A')
       .attr('stroke', 'white')
       .attr("fill", function (d) {
         if(d.data.key==choosenmake) {
            return "#36454F"; // Get fill of current item
         } else {
-          return "#91bbff"
+          return "#4D8E9A"
         }
       });
 
@@ -422,10 +422,10 @@ function renderBarPlotMotortypebyMake(data){
       if(choosenmake!=null) {
          return "#36454F"; // Get fill of current item
       } else {
-        return "#91bbff"
+        return "#4D8E9A"
       }
     });
-//#91bbff
+//#4D8E9A
   
   u
      .enter()
