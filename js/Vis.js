@@ -123,6 +123,8 @@ var modelGroups = svgmodel.selectAll(".model-group")
     .attr("class", "model-group")
     .attr("transform", function(d) { return "translate(" + x(d.model) + ",0)"; });
 
+    var maxBarWidth = 50;
+
 // Erstellen der einzelnen Balken
 modelGroups.selectAll("rect")
     .data(function(d) { return d.fuels; })
@@ -130,7 +132,11 @@ modelGroups.selectAll("rect")
     .attr("x", function(d, i, nodes) { 
         return i * (x.bandwidth() / nodes.length);
     })
-    .attr("width", x.bandwidth() / stackData[0].fuels.length)
+    .attr("width", function(d, i, nodes) {
+        // Berechnung der Breite jedes Balkens mit einer Beschränkung auf die maximale Breite
+        var barWidth = x.bandwidth() / stackData[0].fuels.length;
+        return Math.min(barWidth, maxBarWidth);
+    })
     .attr("y", function(d) { return y(d.count); })
     .attr("height", function(d) { return heightbm - y(d.count); })
     .attr("fill", function(d) { return colorScale(d.fuel); });
