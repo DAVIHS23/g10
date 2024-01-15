@@ -2,6 +2,12 @@ var colorScale = d3.scaleOrdinal()
   .domain(["Gasoline", "Diesel", "Electric", "Electric/Diesel", "Electric/Gasoline"]) 
   .range(["#232D3F", "#176B87", "#005B41", "#CD5C08", "#CD5C08"]); 
 
+//Slider mit Standart Wert
+var slider_year = document.getElementById("SliderRegistrationYear2");
+var output2 = document.getElementById("OutputSlider2");
+output2.innerHTML = "Verkausjahr auf Autoscout24: "+slider_year.value;
+
+
 // Definition der SVG-Größe und Margen
 var marginbm = {top: 20, right: 30, bottom: 40, left: 90},
     widthbm = 1100 - marginbm.left - marginbm.right,
@@ -20,7 +26,8 @@ var svgmodel = d3.select("#ModelBarplot")
     d3.csv("data/autoscout24-germany-dataset.csv", function(databm) {
         let uniqueMakes = [...new Set(databm.map(item => item.make))]; // Einzigartige Marken
         uniqueMakes.sort(); // Alphabetisches Sortieren
-    
+        
+        const slider2 = d3.select("#SliderRegistrationYear2");
         const dropdown = d3.select('#makedropdown'); // Zugriff auf das Dropdown-Element
         uniqueMakes.forEach(make => {
             dropdown.append('option').text(make).attr('data-value', make); // Hinzufügen jeder Marke als Option mit data-value
@@ -32,13 +39,37 @@ var svgmodel = d3.select("#ModelBarplot")
             let selectedValue = selectedOption.attr('data-value'); // Auslesen des data-value Attributs
             console.log('Ausgewählte Marke:', selectedValue);
 
-            var modelEngineData = d3.nest()
+        
+
+        var modelEngineData = d3.nest()
         .key(function(n) { return n.model; })
         .key(function(n) { return n.fuel; })
         .rollup(function(leaves) { return leaves.length; })
-        .entries(databm.filter(function(p) { return p.make === selectedValue; }));
-    
-            updateBarPlotBM(selectedValue, databm); // Aufruf der Funktion zum Aktualisieren des Balkendiagramms
+        .entries(databm.filter(function(p) { return p.make === selectedValue && p.year === slider_year.value; }));
+        console.log("yearr after dropdown", slider_year)    
+        console.log("databm after dropdown",modelEngineData);
+            updateBarPlotBM(selectedValue, modelEngineData); // Aufruf der Funktion zum Aktualisieren des Balkendiagramms
+        });
+
+        
+        slider2.on("change", function () {
+          const year = this.value;
+          console.log("Selected year Slider 2: " + year);
+          output2.innerHTML = "Jahr der Listung auf Autoscout24: "+year;
+        
+          let selectedOption = d3.select('#makedropdown').select('option:checked');
+          let selectedValue = selectedOption.attr('data-value'); // Auslesen des data-value Attributs
+          console.log('Ausgewählte Marke Slider:', selectedValue);
+
+          var modelEngineData = d3.nest()
+          .key(function(n) { return n.model; })
+          .key(function(n) { return n.fuel; })
+          .rollup(function(leaves) { return leaves.length; })
+          .entries(databm.filter(function(p) { return p.make === selectedValue && p.year === year; }));
+        
+          console.log("databm after slider",modelEngineData);
+          updateBarPlotBM(selectedValue, modelEngineData);
+          console.log("Updated BarPlotBM!")
         });
 
         
@@ -49,13 +80,13 @@ function updateBarPlotBM(selectedValue, databm) {
     // Löschen Sie vorherige Balken
     svgmodel.selectAll("*").remove();
 
-    var nestedData = d3.nest()
-    .key(function(d) { return d.model; })
-    .key(function(d) { return d.fuel; })
-    .rollup(function(leaves) { return leaves.length; })
-    .entries(databm.filter(function(d) { return d.make === selectedValue; }));
+//    var nestedData = d3.nest()
+//    .key(function(d) { return d.model; })
+//    .key(function(d) { return d.fuel; })
+//    .rollup(function(leaves) { return leaves.length; })
+//    .entries(databm.filter(function(d) { return d.make === selectedValue; }));
 
-var stackData = nestedData.map(function(d) {
+var stackData = databm.map(function(d) {
     var y0 = 0;
     var fuels = d.values.map(function(dd) {
         return { model: d.key, fuel: dd.key, count: dd.value, y0: y0, y1: y0 += dd.value };
